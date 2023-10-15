@@ -26,8 +26,8 @@ const LoginPage = () => {
   const router = useRouter();
 
   const containerClassName = classNames('surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden', { 'p-input-filled': layoutConfig.inputStyle === 'filled' });
-  const onLogin = () => {
-    const user = login(email, password)
+  const onLogin = async () => {
+    const user = await login(email, password)
     if (user) {
       setCurrentUser(user)
       setCookie('token', JSON.stringify(user))

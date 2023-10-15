@@ -1,12 +1,13 @@
-import leads from '@/service/mock-data/lead'
+import leadsPromise from '@/service/mock-data/lead'
 import { IRequestFilter, IResponse } from './model'
 import { Lead } from '@/model/lead'
 import { User } from '@/model'
-
-export function getLeads(agentId:string, filter?: IRequestFilter) {
+export async function getLeads(agentId:string, filter?: IRequestFilter) {
+  const leads = await leadsPromise
   return leads.filter(l => l.agentId === agentId)
 }
-export function getLead(id: string) {
+export async function getLead(id: string) {
+  const leads = await leadsPromise
   return leads.find(l => l.id === id)
 }
 

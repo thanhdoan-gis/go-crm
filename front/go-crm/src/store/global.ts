@@ -3,9 +3,10 @@ import { atom, selector } from 'recoil';
 
 
 export const currentUserState = atom<User | null>({
-  key: 'currentUser',
+  key: 'currentUserState',
   default: null,
-  effects: []
+  effects: [
+  ]
 });
 
 export const isAdminState = selector<boolean>({
@@ -23,7 +24,7 @@ export const agentsState = atom<Agent[]>({
 });
 
 export const selectedAgentState = atom<Agent | null>({
-  key: 'selectedAgent',
+  key: 'selectedAgentState',
   default: null,
   effects: []
 });

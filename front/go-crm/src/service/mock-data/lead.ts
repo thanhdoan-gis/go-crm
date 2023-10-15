@@ -3502,4 +3502,7 @@ const leads: Lead[] = [
 		"agentId": "1A473D77-8E53-6B3C-78CE-08D4D635E2EE"
 	}
 ];
-export default leads
+const leadsPromise = new Promise<Lead[]>((resolve,reject)=>{
+	resolve(leads)
+})
+export default leadsPromise

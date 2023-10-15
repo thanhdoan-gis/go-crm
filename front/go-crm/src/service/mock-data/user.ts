@@ -32,5 +32,7 @@ const users:User[] = [
 		"phone": "1-321-310-9443"
 	}
 ];
-
-export default users
+const usersPromise = new Promise<User[]>((resolve,reject)=>{
+	resolve(users)
+})
+export default usersPromise

@@ -16,5 +16,7 @@ const agents: Agent[] = [
 		"name": "Agent2"
 	}
 ];
-
-export default agents
+const agentsPromise = new Promise<Agent[]>((resolve,reject)=>{
+	resolve(agents)
+})
+export default agentsPromise

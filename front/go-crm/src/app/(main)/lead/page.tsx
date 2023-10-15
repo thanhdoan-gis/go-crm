@@ -6,21 +6,28 @@ import { Column } from 'primereact/column';
 import { useRouter } from 'next/navigation'
 import { currentUserState, isAdminState, selectedAgentState } from '@/store/global'
 import { useRecoilValue } from "recoil";
+import { useEffect, useState } from "react";
 
 function LeadPage() {
   const selectedAgent = useRecoilValue(selectedAgentState)
   const currentUser = useRecoilValue(currentUserState)
+  const [leads, setLeads] = useState<Lead[]>([])
   const router = useRouter()
-  if (!currentUser || !selectedAgent) return
-  const leads: Lead[] = getLeads(selectedAgent.id)
-  const listItems = leads
   function onSelectionChanged(event: DataTableSelectionSingleChangeEvent<Lead[]>) {
     router.push(`/lead/${event.value.id}`)
   }
+  useEffect(() => {
+    const getLeadsOnView = async () => {
+      if (!selectedAgent) return
+      const leads = await getLeads(selectedAgent.id)
+      setLeads(leads)
+    }
+    getLeadsOnView()
+  }, [selectedAgent])
   return (
     <>
       <DataTable
-        value={listItems}
+        value={leads}
         stripedRows
         paginator
         rows={10}

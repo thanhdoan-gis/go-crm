@@ -9,6 +9,7 @@ import { Menu } from 'primereact/menu';
 import { MenuItem } from 'primereact/menuitem';
 import { Toast } from 'primereact/toast';
 import { useRouter } from 'next/navigation';
+import { useCookies } from 'react-cookie';
 
 const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
   const { layoutConfig, layoutState, onMenuToggle, showProfileSidebar } = useContext(LayoutContext);
@@ -18,19 +19,21 @@ const AppTopbar = forwardRef<AppTopbarRef>((props, ref) => {
   const topbarOptionsMenuButtonRef = useRef(null);
   const router = useRouter()
   const toast = useRef<Toast>(null);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const topbarOptionsMenuItems: MenuItem[] = [
     {
-        label: 'Options',
-        items: [
-            {
-                label: 'Log out',
-                icon: 'pi pi-sign-out',
-                command: () => {
-                    toast.current.show({ severity: 'success', summary: 'Logged out', detail: 'Logging out to application', life: 3000 });
-                    router.push('/auth/login')
-                }
-            }
-        ]
+      label: 'Options',
+      items: [
+        {
+          label: 'Log out',
+          icon: 'pi pi-sign-out',
+          command: () => {
+            removeCookie('token')
+            toast.current.show({ severity: 'success', summary: 'Logged out', detail: 'Logging out to application', life: 3000 });
+            router.push('/auth/login')
+          }
+        }
+      ]
     }]
   useImperativeHandle(ref, () => ({
     menubutton: menubuttonRef.current,

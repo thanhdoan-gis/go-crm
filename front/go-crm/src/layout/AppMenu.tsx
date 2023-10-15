@@ -39,7 +39,6 @@ const AppMenu = () => {
           placeholder="Select an Agent"
           className="w-full md:w-14rem"
           onChange={(e) => {
-            debugger
             setSelectedAgent(e.value)
           }} /> : ''}
       <ul className="layout-menu">
